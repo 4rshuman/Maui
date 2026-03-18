@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Baba! 🎂</title>
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1000px;
+  width: 100%;
+}
+
+/* memory photos */
+.memories {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.memories img {
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border: 2px solid white;
+}
+
+/* card */
+.scene {
+  width: 380px;
+  max-width: 90vw;
+  height: 520px;
+  perspective: 1200px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.card.open {
+  transform: rotateY(-170deg);
+}
+
+.front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #2c3e50;
+  color: #f1c40f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 15px;
+  backface-visibility: hidden;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 4px solid #f1c40f;
+}
+
+.inside {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-sizing: border-box;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+}
+
+/* video */
+.videoBox video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+/* message */
+#message {
+  font-size: 16px;
+  color: #2c3e50;
+  overflow-y: auto;
+  flex: 1;
+  padding: 15px;
+  scrollbar-width: thin;
+  line-height: 1.6;
+  border-radius: 10px;
+  background: #f9f9f9;
+  border-left: 4px solid #2c3e50;
+}
+
+h1 {
+  margin: 5px 0;
+  color: #2c3e50;
+  text-align: center;
+  font-size: 22px;
+}
+
+h2 {
+  margin: 0 0 10px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* confetti/gold flakes instead of petals */
+.petal {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #f1c40f;
+  border-radius: 2px;
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0); }
+  100% { transform: translateY(100vh) rotate(720deg); }
+}
+
+@media(max-width:700px){
+  .container { flex-direction: column; align-items: center; }
+  .memories { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .memories img { width: 65px; height: 65px; }
+  .scene { height: 480px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="memories">
+    <img src="photo1.jpg" alt="Memory 1">
+    <img src="photo2.jpg" alt="Memory 2">
+    <img src="photo3.jpg" alt="Memory 3">
+    <img src="photo4.jpg" alt="Memory 4">
+  </div>
+
+  <div class="scene">
+    <div class="card" id="card">
+      <div class="front">
+        <span style="font-size: 50px;">🎁</span>
+        <p>A small surprise for the world's best Dad.</p>
+        <p style="font-size: 14px; opacity: 0.8;">(Click to open)</p>
+      </div>
+
+      <div class="inside">
+        <div class="videoBox">
+          <video autoplay muted loop playsinline>
+            <source src="video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <h1>Happy Birthday</h1>
+        <h2 style="color:#b21f1f">Baba</h2>
+
+        <div id="message"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="memories">
+    <img src="photo5.jpg" alt="Memory 5">
+    <img src="photo6.jpg" alt="Memory 6">
+    <img src="photo7.jpg" alt="Memory 7">
+    <img src="photo8.jpg" alt="Memory 8">
+  </div>
+</div>
+
+<audio id="music">
+    <source src="idk.m4a" type="audio/mp4">
+</audio>
+
+<script>
+const card = document.getElementById("card");
+const music = document.getElementById("music");
+const message = document.getElementById("message");
+
+// Updated text for Baba
+const text = "Dear Baba, Happy Birthday! I wanted to create something special to show how much I appreciate everything you do. You've always been my greatest mentor and my coolest friend. I am truly grateful for the wisdom you share and the many happy moments we've enjoyed together. You make everything look easy, and your strength is something I always look up to. Wishing you a day filled with relaxation, joy, and all the things you love. You deserve the very best! Love you always.";
+
+let i = 0;
+let started = false;
+
+function typeWriter() {
+  if (i < text.length) {
+    message.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 45);
+    message.scrollTop = message.scrollHeight; 
+  }
+}
+
+card.onclick = () => {
+  card.classList.toggle("open");
+  music.play().catch(e => console.log("Audio interaction required"));
+
+  if (!started) {
+    typeWriter();
+    goldFlakes();
+    started = true;
+  }
+};
+
+function goldFlakes() {
+  const colors = ['#f1c40f', '#ffffff', '#e67e22'];
+  for (let i = 0; i < 50; i++) {
+    let p = document.createElement("div");
+    p.className = "petal";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (3 + Math.random() * 4) + "s";
+    p.style.width = (Math.random() * 8 + 5) + "px";
+    document.body.appendChild(p);
+  }
+}
+</script>
+
+</body>
+</html>
